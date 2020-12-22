@@ -1,0 +1,55 @@
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>用户注册(Register)</title>
+
+
+    <link rel="stylesheet" href="../assets/css/supersized.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<div class="page-container">
+    <h1>用户注册(Reg)</h1>
+    <form name="form3" method="get">
+        <input type="text" id="newName" class="username" placeholder="请输入用户名">
+        <input type="password" id="newPassword" class="password" placeholder="请输入您的密码">
+        <input type="password" id="repeat_new_password" class="password" placeholder="请在输入一次">
+
+    </form>
+    <button onclick="register()" class="button2">确认</button>
+    <button type="reset" class="submit_button">清除</button>
+</div>
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/jquery-1.8.2.min.js" ></script>
+<script src="../assets/js/supersized.3.2.7.min.js" ></script>
+<script src="../assets/js/supersized-init.js" ></script>
+</body>
+
+<script>
+    function register(){
+        var newName = $("#newName").val();
+        var newPassword = $("#newPassword").val();
+        var repeatPassword = $("#repeat_new_password").val();
+        $.ajax({
+            url:'/addUser',
+            data:{
+                newName:newName,
+                newPassword:newPassword,
+                repeatPassword:repeatPassword
+            },
+            type:'post',
+            success:function(data){
+                if(data == '1'){
+                    alert("注册成功")
+                    window.location.href = "/login"
+                }
+                else {
+                    alert(data)
+                    alert('密码两次输入不一致')
+                }
+            }
+        })
+    }
+</script>
+
+</html>

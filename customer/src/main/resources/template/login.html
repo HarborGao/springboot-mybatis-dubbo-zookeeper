@@ -1,0 +1,65 @@
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <title>用户登录(Login)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- 外链接，引入CSS样式 -->
+
+    <link rel="stylesheet" href="../assets/css/supersized.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="../assets/js/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="page-container">
+    <h1>用户登录(Log in)</h1>
+    <form name="form1" method="get">
+        <input type="text" id="username" class="username" placeholder="请输入您的用户名">
+        <input type="password" id="pwd" class="password" placeholder="请输入您的登录密码">
+        <!--<input type="Captcha" class="Captcha" name="Captcha" placeholder="请输入验证码">-->
+
+
+        <div class="error"><span>+</span></div>
+    </form>
+    <button onclick="logIn()" class="submit_button">登录</button>
+    <form name="form2" action="register" method="get">
+        <button type="submit" class="button2">注册</button>
+    </form>
+</div>
+<!-- 引入Javascript -->
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/jquery-1.8.2.min.js" ></script>
+<script src="../assets/js/supersized.3.2.7.min.js" ></script>
+<script src="../assets/js/supersized-init.js" ></script>
+</body>
+
+<script>
+    function logIn(){
+        var username = $("#username").val();
+        var password = $("#pwd").val();
+        // axios.post("admin/login.action",JSON.stringify({username:username,password:password})
+        //
+        // ).then((response)=>{alert(response)}).catch((err)=>{console.log(err)});
+        $.ajax({
+            url:'/getContent',
+            data:{
+                userName: username,
+                password: password
+            },
+            type:'post',
+            success:function(data){
+                if(data == '1'){
+                    window.location.href = "/content";
+                }else{
+                    alert("用户名或密码错误！");
+                }
+            }
+        });
+    }
+</script>
+</html>
